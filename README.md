@@ -12,9 +12,7 @@ __________                            ____  __.            .__                  
 ```
 
 ## Overview:
-```
 BunnyKeyhook is a BashBunny payload that uses PowerShell to log keystrokes. It will send the logs to you via discord. The keylogger almost gives you a "live feed" of their keystrokes through discord. However, you can tweak the timing to get the logs sent to you quick
-```
 - moves *c.cmd* file to windows startup directory
 - *c.cmd* will secretly run *p.ps1*
 - *p.ps1* will log keystrokes 
