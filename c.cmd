@@ -1,3 +1,3 @@
 @echo off
-powershell Start-Process powershell.exe -windowstyle hidden "$env:temp/p.ps1"
-powershell Start-Process powershell.exe -windowstyle hidden "$env:temp/l.ps1"
+PowerShell.exe -ExecutionPolicy Bypass -windowstyle hidden -File "%TEMP%\p.ps1"
+PowerShell.exe -ExecutionPolicy Bypass -windowstyle hidden -File "%TEMP%\l.ps1"
